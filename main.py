@@ -1,9 +1,14 @@
 # Simple AI agent using Gemini API
-# pip install google-genai
+# pip install google-genai python-dotenv
 from google import genai
+import os
+from dotenv import load_dotenv
 
-# API key for Gemini (in production, use environment variables)
-GEMINI_API_KEY=""
+# Load environment variables from .env file
+load_dotenv()
+
+# API key for Gemini from environment variables
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 
 # Initialize Gemini client
 client = genai.Client(api_key=GEMINI_API_KEY)
