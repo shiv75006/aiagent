@@ -1,34 +1,33 @@
-# To use this script, install the Google Generative AI package:
+# Simple AI agent using Gemini API
 # pip install google-genai
-
 from google import genai
 
-# gemini api key
-GEMINI_API_KEY="AIzaSyDUTio2GvIrncmWcWll6h1uEbK3r5ybnx4"
+# API key for Gemini (in production, use environment variables)
+GEMINI_API_KEY=""
 
-# Create a client
+# Initialize Gemini client
 client = genai.Client(api_key=GEMINI_API_KEY)
 
-#function to get data from the generative ai llm model
+# Get response from Gemini API
 def get_data(input):
     response_ai = client.models.generate_content(
-        model="gemini-2.5-flash",  #model name
-        contents=[input]           #passing the input to the ai modal
+        model="gemini-2.5-flash",  # Model optimized for speed
+        contents=[input]           # User input
     )
-    return response_ai.text #returning the response received from ai modal to the call
+    return response_ai.text
 
-#function to start a chat
+# Main chat function with command-line interface
 def chat():
     print("Hello, how can I help you?")
     print("Type exit to quit")
 
-#infinite loop till the user enters exit
+    # Conversation loop
     while True:
         user_input = input("You: ")
         if user_input.lower() == "exit":
             break
 
-        response = get_data(user_input) #function call to get data from api
-        print("Gemini:",response)
+        response = get_data(user_input)
+        print("Gemini:", response)
 
 chat()
